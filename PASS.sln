@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.UGMS", "PASS.UGMS\PASS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.AMS", "PASS.AMS\PASS.AMS.csproj", "{D474203A-4011-4B12-8FB8-9EFB1395434B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.Common", "PASS.Common\PASS.Common.csproj", "{A9052BBB-BF66-4C46-AD6B-7A39D396CFA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.CommonTests", "PASS.CommonTests\PASS.CommonTests.csproj", "{1A914646-70D5-46FA-8B84-9C6E0849AE5D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		PASS\PASS.projitems*{8810375e-4812-4f37-a1a6-08b0939f08e0}*SharedItemsImports = 13
@@ -32,6 +36,14 @@ Global
 		{D474203A-4011-4B12-8FB8-9EFB1395434B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D474203A-4011-4B12-8FB8-9EFB1395434B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D474203A-4011-4B12-8FB8-9EFB1395434B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9052BBB-BF66-4C46-AD6B-7A39D396CFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9052BBB-BF66-4C46-AD6B-7A39D396CFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9052BBB-BF66-4C46-AD6B-7A39D396CFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9052BBB-BF66-4C46-AD6B-7A39D396CFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A914646-70D5-46FA-8B84-9C6E0849AE5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A914646-70D5-46FA-8B84-9C6E0849AE5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A914646-70D5-46FA-8B84-9C6E0849AE5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A914646-70D5-46FA-8B84-9C6E0849AE5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
