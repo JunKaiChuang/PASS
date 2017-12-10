@@ -134,7 +134,7 @@ namespace PASS.Common.DaoService
         /// Create a commaseparated list of value pairs on 
         /// the form: "key1=@value1, key2=@value2, ..."
         /// </summary>
-        private static string GetSqlPairs
+        protected static string GetSqlPairs
         (IEnumerable<string> keys, string separator = ", ")
         {
             var pairs = keys.Select(key => string.Format("{0}=@{0}", key)).ToList();
@@ -152,7 +152,7 @@ namespace PASS.Common.DaoService
         /// Retrieves a Dictionary with name and value 
         /// for all object properties matching the given criteria.
         /// </summary>
-        private static PropertyContainer ParseProperties(T obj)
+        protected static PropertyContainer ParseProperties(T obj)
         {
             var propertyContainer = new PropertyContainer();
 

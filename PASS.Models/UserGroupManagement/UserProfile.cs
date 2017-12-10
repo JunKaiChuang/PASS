@@ -19,6 +19,8 @@ namespace PASS.Models.UserGroupManagement
 
         [DapperKey]
         public string UserID { get; set; }
+        
+        public string UserPW { get; set; }
 
         public string Authorization { get; set; }
     }
