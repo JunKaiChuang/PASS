@@ -71,7 +71,7 @@ namespace PASS.Common.DaoService
                 using (var cn = GetOpenConnection())
                 {
                     var propertyContainer = ParseProperties(obj);
-                    var sqlIdPairs = GetSqlPairs(propertyContainer.IdNames);
+                    var sqlIdPairs = GetSqlPairs(propertyContainer.IdNames, " AND ");
                     var sqlValuePairs = GetSqlPairs(propertyContainer.ValueNames);
                     var sql = string.Format(@"
                                         UPDATE [{0}] 
@@ -106,7 +106,7 @@ namespace PASS.Common.DaoService
             if (File.Exists(dbPath))
             {
                 var propertyContainer = ParseProperties(obj);
-                var sqlIdPairs = GetSqlPairs(propertyContainer.IdNames);
+                var sqlIdPairs = GetSqlPairs(propertyContainer.IdNames , " AND ");
 
                 using (var cn = GetOpenConnection())
                 {

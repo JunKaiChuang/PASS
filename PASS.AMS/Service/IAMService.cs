@@ -33,7 +33,7 @@ namespace PASS.AMS.Service
         /// <param name="userNo"></param>
         /// <param name="file"></param>
         /// <returns></returns>
-        Boolean SubmitWork(Int64 userNo, Stream file);
+        Boolean SubmitWork(SubmissionDetail subDetail, MemoryStream file);
 
         /// <summary>
         /// 取得該學生於指定課號的已上傳作業清單

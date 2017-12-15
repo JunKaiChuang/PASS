@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PASS.Models.AssignmentManagement;
+using PASS.Common.DaoService;
+using PASS.AMS.Dao;
+using PASS.Common.Security;
 
 namespace PASS.AMS.Service
 {
@@ -13,9 +16,16 @@ namespace PASS.AMS.Service
     /// </summary>
     public class AMService : IAMService
     {
+        //作業管理Dao宣告
+        private AMDao _AMDao = new AMDao();
+        private FileDao _FileDao = new FileDao();
+        private GenericDao<SubmissionDetail> _SubDao = new GenericDao<SubmissionDetail>();
+
+        private SecurityService _security = new SecurityService();
+
         public bool CreateOrModifyAssignment(Assignment assignment)
         {
-            throw new NotImplementedException();
+            return _AMDao.CreateOrModify(assignment);
         }
 
         public List<Assignment> GetAssignmentList(long courseNo)
@@ -33,9 +43,28 @@ namespace PASS.AMS.Service
             throw new NotImplementedException();
         }
 
-        public bool SubmitWork(long userNo, Stream file)
+        public bool SubmitWork(SubmissionDetail subDetail, MemoryStream file)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _SubDao.Insert(subDetail);
+
+                if (subDetail.FileNo != 0)
+                {
+                    _FileDao.Delete(subDetail.FileNo);
+                }                
+
+                var fileNo = _FileDao.Insert(file);
+
+                subDetail.FileNo = fileNo;
+
+                _SubDao.Update(subDetail);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            return true;
         }
     }
 }

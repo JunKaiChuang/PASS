@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DaoService\FileDao.cs" />
     <Compile Include="DaoService\GenericDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\CommonService.cs" />

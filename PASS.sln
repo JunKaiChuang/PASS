@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.CommonTests", "PASS.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.UGMSTests", "PASS.UGMSTests\PASS.UGMSTests.csproj", "{FE5309BF-33C3-4995-B87F-37C51F0C3CF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.AMSTests", "PASS.AMSTests\PASS.AMSTests.csproj", "{8956A928-3773-4133-B9BF-2EDED0D18032}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		PASS\PASS.projitems*{8810375e-4812-4f37-a1a6-08b0939f08e0}*SharedItemsImports = 13
@@ -50,6 +52,10 @@ Global
 		{FE5309BF-33C3-4995-B87F-37C51F0C3CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE5309BF-33C3-4995-B87F-37C51F0C3CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE5309BF-33C3-4995-B87F-37C51F0C3CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8956A928-3773-4133-B9BF-2EDED0D18032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8956A928-3773-4133-B9BF-2EDED0D18032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
