@@ -20,7 +20,7 @@ namespace PASS.AMS.Service.Tests
         [TestInitialize]
         public void Init()
         {
-            _assignment = new Assignment() { CourseNo = 1, AssignOrder = 1, AssignmentTitle = "單元測試", StartDate = new DateTime(2017, 12, 15), EndDate = new DateTime(2017, 12, 16) };
+            _assignment = new Assignment() { CourseNo = 1, AssignOrder = 1, AssignmentTitle = "單元測試", EndDate = new DateTime(2017, 12, 16) };
             _subDetail = new SubmissionDetail() { UserNo = 1, AssignmentNo = 2, FileName = "單元測試檔案"};
         }
 

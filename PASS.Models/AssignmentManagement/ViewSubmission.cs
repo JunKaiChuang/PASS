@@ -12,6 +12,14 @@ namespace PASS.Models.AssignmentManagement
     /// </summary>
     public class ViewSubmission
     {
-        //TBA
+        public Int64 AssignmentNo { get; set; }
+
+        public string AssignmentTitle { get; set; }
+
+        public string IsUploaded { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public int Score { get; set; }
     }
 }

@@ -51,7 +51,6 @@ namespace PASS.AMS.Dao
                                     AssignOrder = row.Field<int>("AssignOrder"),
                                     AssignmentTitle = row.Field<string>("AssignmentTitle"),
                                     AssignmentDescription = row.Field<string>("AssignmentDescription"),
-                                    StartDate = row.Field<DateTime>("StartDate"),
                                     EndDate = row.Field<DateTime>("EndDate")
 
                                 }).ToList();

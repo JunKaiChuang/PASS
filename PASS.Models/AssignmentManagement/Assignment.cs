@@ -22,8 +22,7 @@ namespace PASS.Models.AssignmentManagement
 
         public string AssignmentTitle { get; set; }
         public string AssignmentDescription { get; set; }
-
-        public DateTime StartDate { get; set; }
+        
         public DateTime EndDate { get; set; }
     }
 }
