@@ -4,13 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.IO;
 
 namespace PASS.Common.Security
 {
     public class SecurityService
     {
+        string _iv;
+        string _key;
+
         /// <summary>
-        /// 將來源文字以雜湊運算
+        /// 初始化安全服務
+        /// </summary>
+        /// <param name="userNo">使用者編號</param>
+        /// <param name="userID">使用者ID</param>
+        public SecurityService(string userNo="emptyIV", string userID= "emptyKEY")
+        {
+            //使用userNo,userID作為IV以及KEY
+            _iv = userID;
+            _key = userNo;
+        }
+
+        /// <summary>
+        /// 將來源文字以雜湊運算後輸出
         /// </summary>
         /// <param name="plaintext">原始文字</param>
         /// <returns></returns>
@@ -33,6 +49,56 @@ namespace PASS.Common.Security
         {
             if (digest == GetDigestText(plaintext)) return true;
             return false;
+        }
+
+        /// <summary>
+        /// 加密資料位元組
+        /// </summary>
+        /// <param name="dataByteArray"></param>
+        /// <returns></returns>
+        public byte[] EncryptFile(byte[] dataByteArray)
+        {
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+            byte[] key = Encoding.ASCII.GetBytes(_key);
+            byte[] iv = Encoding.ASCII.GetBytes(_iv);
+
+            des.Key = key;
+            des.IV = iv;
+
+            // 加密
+            using (MemoryStream ms = new MemoryStream())
+            using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write))
+            {
+                cs.Write(dataByteArray, 0, dataByteArray.Length);
+                cs.FlushFinalBlock();
+
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// 解密資料位元組
+        /// </summary>
+        /// <param name="dataByteArray"></param>
+        /// <returns></returns>
+        public byte[] DecryptFile(byte[] dataByteArray)
+        {
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+            byte[] key = Encoding.ASCII.GetBytes(_key);
+            byte[] iv = Encoding.ASCII.GetBytes(_iv);
+
+            des.Key = key;
+            des.IV = iv;
+
+            // 解密
+            using (MemoryStream ms = new MemoryStream())
+            using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
+            {
+                cs.Write(dataByteArray, 0, dataByteArray.Length);
+                cs.FlushFinalBlock();
+
+                return ms.ToArray();
+            }
         }
     }
 }
