@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `Assignment` (
 	`AssignOrder`	INTEGER NOT NULL,
 	`AssignmentTitle`	TEXT NOT NULL,
 	`AssignmentDescription`	TEXT,
-	`StartDate`	DateTime NOT NULL,
 	`EndDate`	DateTime NOT NULL
 );
 COMMIT;
