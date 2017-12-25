@@ -53,6 +53,7 @@
     <Compile Include="AssignmentManagement\ViewSubmission.cs" />
     <Compile Include="Attribute\Key.cs" />
     <Compile Include="Course\CourseInfo.cs" />
+    <Compile Include="Course\SemesterInfo.cs" />
     <Compile Include="Dao\PropertyContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserGroupManagement\UserProfile.cs" />

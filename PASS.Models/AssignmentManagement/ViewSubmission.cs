@@ -16,10 +16,12 @@ namespace PASS.Models.AssignmentManagement
 
         public string AssignmentTitle { get; set; }
 
+        public int AssignOrder { get; set; }
+
         public string IsUploaded { get; set; }
 
         public DateTime EndDate { get; set; }
 
-        public int Score { get; set; }
+        public string Score { get; set; }
     }
 }

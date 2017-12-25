@@ -11,7 +11,7 @@ namespace PASS.Models.Course
     /// </summary>
     public class CourseInfo
     {
-        public int CourseNo { get; set; }
+        public Int64 CourseNo { get; set; }
 
         public string CourseName { get; set; }
 

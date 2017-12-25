@@ -8,6 +8,7 @@ using PASS.Models.AssignmentManagement;
 using PASS.Common.DaoService;
 using PASS.AMS.Dao;
 using PASS.Common.Security;
+using PASS.Models.Course;
 
 namespace PASS.AMS.Service
 {
@@ -19,6 +20,8 @@ namespace PASS.AMS.Service
         //作業管理Dao宣告
         private AMDao _AMDao = new AMDao();
         private FileDao _FileDao = new FileDao();
+        private CourseDao _CourseDao = new CourseDao();
+        private ViewSubmissionDao _ViewSubDao = new ViewSubmissionDao();
         private GenericDao<SubmissionDetail> _SubDao = new GenericDao<SubmissionDetail>();
 
         private SecurityService _security = new SecurityService();
@@ -38,9 +41,9 @@ namespace PASS.AMS.Service
             throw new NotImplementedException();
         }
 
-        public List<ViewSubmission> GetSubmissionList(long userNo, long curseNo)
+        public List<ViewSubmission> GetSubmissionList(long userNo, long courseNo)
         {
-            throw new NotImplementedException();
+            return _ViewSubDao.GetViewSubmissionByUserNoAndCourseNo(userNo, courseNo);
         }
 
         public bool SubmitWork(SubmissionDetail subDetail, MemoryStream file)
@@ -65,6 +68,11 @@ namespace PASS.AMS.Service
                 throw e;
             }
             return true;
+        }
+
+        public List<CourseInfo> GetCourseInfoByUserNo(long userNo)
+        {
+            return _CourseDao.GetCourseListByUserNo(userNo);
         }
     }
 }

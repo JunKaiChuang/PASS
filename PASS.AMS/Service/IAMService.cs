@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PASS.Models.AssignmentManagement;
+using PASS.Models.Course;
 using System.IO;
 
 namespace PASS.AMS.Service
@@ -21,7 +22,7 @@ namespace PASS.AMS.Service
         Boolean CreateOrModifyAssignment(Assignment assignment);
 
         /// <summary>
-        /// 依照課號取得作業題目清單
+        /// 依照課號取得作業題目清單(教授/助教)
         /// </summary>
         /// <param name="courseNo"></param>
         /// <returns></returns>
@@ -36,12 +37,12 @@ namespace PASS.AMS.Service
         Boolean SubmitWork(SubmissionDetail subDetail, MemoryStream file);
 
         /// <summary>
-        /// 取得該學生於指定課號的已上傳作業清單
+        /// 取得該學生於指定課號的作業清單
         /// </summary>
         /// <param name="userNo"></param>
         /// <param name="curseNo"></param>
         /// <returns></returns>
-        List<ViewSubmission> GetSubmissionList(Int64 userNo, Int64 curseNo);
+        List<ViewSubmission> GetSubmissionList(Int64 userNo, Int64 courseNo);
 
         /// <summary>
         /// 取得已上傳的作業資訊
@@ -49,5 +50,12 @@ namespace PASS.AMS.Service
         /// <param name="submissionNo"></param>
         /// <returns></returns>
         SubmissionDetail GetSubmissionDetail(Int64 submissionNo);
+
+        /// <summary>
+        /// 依照UserNo取得課程清單
+        /// </summary>
+        /// <param name="userNo"></param>
+        /// <returns></returns>
+        List<CourseInfo> GetCourseInfoByUserNo(Int64 userNo);
     }
 }
