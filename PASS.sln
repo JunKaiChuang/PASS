@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.UGMSTests", "PASS.UGMS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.AMSTests", "PASS.AMSTests\PASS.AMSTests.csproj", "{8956A928-3773-4133-B9BF-2EDED0D18032}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.Web", "PASS.Web\PASS.Web.csproj", "{A0837926-AC1D-45B9-8516-1DDC9E149848}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		PASS\PASS.projitems*{8810375e-4812-4f37-a1a6-08b0939f08e0}*SharedItemsImports = 13
@@ -56,6 +58,10 @@ Global
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

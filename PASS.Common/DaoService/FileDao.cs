@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using PASS.Models.Dao;
 using PASS.Models.Attribute;
+using System.Configuration;
 
 namespace PASS.Common.DaoService
 {
     public class FileDao
     {
-        static string dbPath = @"E:\DB\PASS.db";
+        static string dbPath = ConfigurationManager.AppSettings["DbPath"];
         static string cnStr = "data source=" + dbPath;
 
         public FileDao()
         {
             if (!File.Exists(dbPath))
             {
-                throw new ArgumentNullException("DB路徑錯誤，請修改PASS.Common.DaoService.FileDao的[dbPath]");
+                throw new ArgumentNullException("DB路徑錯誤，請修改PASS.Common.DaoService中App.config的[DbPath]");
             }
         }
 
