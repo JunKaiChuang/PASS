@@ -8,6 +8,7 @@ using PASS.Models.AssignmentManagement;
 using PASS.Common.DaoService;
 using PASS.AMS.Dao;
 using PASS.Common.Security;
+using PASS.Common.Common;
 using PASS.Models.Course;
 
 namespace PASS.AMS.Service
@@ -25,6 +26,7 @@ namespace PASS.AMS.Service
         private GenericDao<SubmissionDetail> _SubDao = new GenericDao<SubmissionDetail>();
 
         private SecurityService _security = new SecurityService();
+        private CommonService _commonService = new CommonService();
 
         public bool CreateOrModifyAssignment(Assignment assignment)
         {
@@ -43,21 +45,24 @@ namespace PASS.AMS.Service
 
         public List<ViewSubmission> GetSubmissionList(long userNo, long courseNo)
         {
-            return _ViewSubDao.GetViewSubmissionByUserNoAndCourseNo(userNo, courseNo);
+            return _ViewSubDao.GetViewSubmissionListByUserNoAndCourseNo(userNo, courseNo);
         }
 
-        public bool SubmitWork(SubmissionDetail subDetail, MemoryStream file)
+        public bool SubmitWork(SubmissionDetail subDetail, MemoryStream file, bool isUploaded)
         {
             try
             {
-                _SubDao.Insert(subDetail);
+                if(!isUploaded)_SubDao.Insert(subDetail);
 
-                if (subDetail.FileNo != 0)
+                if (isUploaded)
                 {
-                    _FileDao.Delete(subDetail.FileNo);
-                }                
+                    _FileDao.Delete(subDetail.UserNo, subDetail.AssignmentNo);
+                }
 
-                var fileNo = _FileDao.Insert(file);
+                var userSecurity = new SecurityService(subDetail.UserNo.ToString(), subDetail.AssignmentNo.ToString());
+                var byteFile = _commonService.StreamToByte(file);
+                var encryptFile = userSecurity.EncryptFile(byteFile);
+                var fileNo = _FileDao.Insert(encryptFile);
 
                 subDetail.FileNo = fileNo;
 
@@ -73,6 +78,21 @@ namespace PASS.AMS.Service
         public List<CourseInfo> GetCourseInfoByUserNo(long userNo)
         {
             return _CourseDao.GetCourseListByUserNo(userNo);
+        }
+
+        public CourseInfo GetCourseInfoByCourseNo(long courseNo)
+        {
+            return _CourseDao.GetCourseInfoByCourseNo(courseNo);
+        }
+
+        public Assignment GetAssignment(long assignmentNo)
+        {
+            return _AMDao.GetAssignmentByNo(assignmentNo);
+        }
+
+        public ViewSubmission GetViewSubmissionByUserNoAndAssignmentNo(long userNo, long assignmentNo)
+        {
+            return _ViewSubDao.GetViewSubmissionByUserNoAndAssignmentNo(userNo, assignmentNo);
         }
     }
 }

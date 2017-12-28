@@ -50,6 +50,27 @@ namespace PASS.AMS.Dao
             }
         }
 
+        public CourseInfo GetCourseInfoByCourseNo(Int64 courseNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"
+                            select CI.*
+                            from CourseInfo as CI
+                            where CI.CourseNo = @CourseNo";
+                var semesterInfo = _commonService.GetCurrentSemesterInfo();
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@CourseNo", courseNo);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                return DtToObj(dt).FirstOrDefault();
+            }
+        }
+
 
 
         private List<CourseInfo> DtToObj(DataTable dt)

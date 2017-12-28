@@ -24,12 +24,13 @@ namespace PASS.AMS.Dao
         {
             using (var cn = GetOpenConnection())
             {
-                var sql = string.Format(@"
-                                            select * from Assignment
-                                            where (UserNo={0})"
-                                        , assignmentNo.ToString());
+                var sql = @"
+                            select * from Assignment
+                            where (AssignmentNo=@AssignmentNo)";
 
                 SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@AssignmentNo", assignmentNo);
+
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 cn.Close();
@@ -48,7 +49,7 @@ namespace PASS.AMS.Dao
                                 {
                                     AssignmentNo = row.Field<Int64>("AssignmentNo"),
                                     CourseNo = row.Field<Int64>("CourseNo"),
-                                    AssignOrder = row.Field<int>("AssignOrder"),
+                                    AssignOrder = (int)row.Field<Int64>("AssignOrder"),
                                     AssignmentTitle = row.Field<string>("AssignmentTitle"),
                                     AssignmentDescription = row.Field<string>("AssignmentDescription"),
                                     EndDate = row.Field<DateTime>("EndDate")
