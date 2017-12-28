@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PASS.Common.DaoService;
 using PASS.Models.UserGroupManagement;
+using PASS.Models.Enum;
 using System.Data;
 
 namespace PASS.UGMS.Dao
@@ -47,7 +48,7 @@ namespace PASS.UGMS.Dao
             {
                 var sql = string.Format(@"
                                             select * from UserProfile
-                                            where (UserID={0})"
+                                            where (UserID='{0}')"
                                         , userID.ToString());
 
                 SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
@@ -56,6 +57,26 @@ namespace PASS.UGMS.Dao
                 cn.Close();
 
                 return DtToObj(dt).FirstOrDefault();
+            }
+        }
+
+        public UserInfo GetUserInfoByUserNo(Int64 userNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"
+                            select UP.UserNo, UP.UserID, UI.UserType
+                            from UserProfile as UP
+                                join UserInfo as UI on UP.UserNo = UI.UserNo
+                            where UP.UserNo = @UserNo";
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@UserNo", userNo);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                return DtToInfo(dt).FirstOrDefault();
             }
         }
 
@@ -73,6 +94,20 @@ namespace PASS.UGMS.Dao
 
                             }).ToList();
             return userProfiles;
+        }
+
+        private List<UserInfo> DtToInfo(DataTable dt)
+        {
+            var userInfo = (from row in dt.AsEnumerable()
+
+                            select new UserInfo
+                                {
+                                    UserNo = row.Field<Int64>("UserNo"),
+                                    UserID = row.Field<string>("UserID"),
+                                    UserType = row.Field<UserType>("UserType")
+
+                                }).ToList();
+            return userInfo;
         }
     }
 }

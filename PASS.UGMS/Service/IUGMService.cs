@@ -33,5 +33,12 @@ namespace PASS.UGMS.Service
         /// <param name="userID"></param>
         /// <returns></returns>
         UserProfile GetUserProfile(Int64 userID);
+
+        /// <summary>
+        /// 取得使用者資訊
+        /// </summary>
+        /// <param name="userNo"></param>
+        /// <returns></returns>
+        UserInfo GetUserInfo(Int64 userNo);
     }
 }

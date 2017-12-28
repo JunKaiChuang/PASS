@@ -28,6 +28,7 @@ namespace PASS.UGMS.Service
         public UserProfile VerifyUser(string userID, string userPW)
         {
             var userProfile = _UGMDao.GetUserProfileByID(userID);
+            if(userProfile == null) return new UserProfile();
             if (!_security.VerifyText(userPW, userProfile.UserPW)) return new UserProfile();
             userProfile.UserPW = string.Empty;
             return userProfile;
@@ -51,6 +52,12 @@ namespace PASS.UGMS.Service
         public UserProfile GetUserProfile(Int64 userNo)
         {
             return _UGMDao.GetUserProfileByNo(userNo);
+        }
+
+
+        public UserInfo GetUserInfo(long userNo)
+        {
+            return _UGMDao.GetUserInfoByUserNo(userNo);
         }
     }
 }
