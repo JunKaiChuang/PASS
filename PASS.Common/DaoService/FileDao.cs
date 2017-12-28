@@ -30,17 +30,18 @@ namespace PASS.Common.DaoService
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public Int64 Insert(MemoryStream fileStream)
+        public Int64 Insert(byte[] fileStream)
         {
             using (var cn = GetOpenConnection())
             {
                 var sql = string.Format(@"INSERT INTO [File] (FileStream) 
-                                            VALUES(@FileStream)");
+                                            VALUES(@FileStream);
+                                           SELECT last_insert_rowid();");
                 var sqlCmd = new SQLiteCommand(cn);
                 sqlCmd.CommandText = sql;
-                sqlCmd.Parameters.Add("@FileStream", System.Data.DbType.Binary).Value = StreamToByte(fileStream);
-
-                var fileNo = sqlCmd.ExecuteNonQuery();
+                sqlCmd.Parameters.Add("@FileStream", System.Data.DbType.Binary).Value = fileStream;
+                                
+                var fileNo = Convert.ToInt64(sqlCmd.ExecuteScalar());
                 cn.Close();
                 return fileNo;
             }
@@ -50,10 +51,27 @@ namespace PASS.Common.DaoService
         {
             using (var cn = GetOpenConnection())
             {
-                var sql = string.Format(@"Delete FROM FILE WHERE FileNo = @FileNo");
+                var sql = string.Format(@"Delete FROM File WHERE FileNo = @FileNo");
                 var sqlCmd = new SQLiteCommand(cn);
                 sqlCmd.CommandText = sql;
                 sqlCmd.Parameters.Add(new SQLiteParameter("@FileNo", fileNo));
+                sqlCmd.ExecuteNonQuery();
+
+                return true;
+            }
+        }
+
+        public bool Delete(Int64 userNo, Int64 assignmentNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"delete
+                            from File
+                            where exists( select 1 from SubmissionDetail as sub where sub.UserNo = @UserNo and sub.AssignmentNo = @AssignmentNo and sub.FileNo = File.FileNo)";
+                var sqlCmd = new SQLiteCommand(cn);
+                sqlCmd.CommandText = sql;
+                sqlCmd.Parameters.Add(new SQLiteParameter("@UserNo", userNo));
+                sqlCmd.Parameters.Add(new SQLiteParameter("@AssignmentNo", assignmentNo));
                 sqlCmd.ExecuteNonQuery();
 
                 return true;
@@ -93,11 +111,7 @@ namespace PASS.Common.DaoService
                 return stream;
             }
         }
-
-        public static byte[] StreamToByte(MemoryStream input)
-        {
-            return input.ToArray();
-        }
+               
 
         protected SQLiteConnection GetOpenConnection()
         {

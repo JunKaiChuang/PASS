@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PASS.Models.Course;
+using System.IO;
 
 namespace PASS.Common.Common
 {
@@ -21,6 +22,16 @@ namespace PASS.Common.Common
             var schoolYear = semester == 1 ? republicEra : republicEra - 1; //第一學期學年與民國年相同，第二學期則為民國年減一
 
             return new SemesterInfo() {SchoolYear = schoolYear, Semester = semester };
+        }
+
+        /// <summary>
+        /// MemoryStream 轉byte[]
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public byte[] StreamToByte(MemoryStream input)
+        {
+            return input.ToArray();
         }
     }
 }

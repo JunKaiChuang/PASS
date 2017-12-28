@@ -18,11 +18,12 @@ namespace PASS.Common.Security
         /// </summary>
         /// <param name="userNo">使用者編號</param>
         /// <param name="userID">使用者ID</param>
-        public SecurityService(string userNo="emptyIV", string userID= "emptyKEY")
+        public SecurityService(string userNo="emptyIV-", string assignmentNo= "emptyKEY-")
         {
+            if(userNo.Length > 8 || assignmentNo.Length > 8) new ArgumentNullException("加密的iv 或key大於8 bytes");
             //使用userNo,userID作為IV以及KEY
-            _iv = userID;
-            _key = userNo;
+            _iv = assignmentNo.ToString().PadLeft(8, '0'); ;
+            _key = userNo.ToString().PadLeft(8, '0'); ;
         }
 
         /// <summary>
