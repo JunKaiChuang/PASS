@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PASS", "PASS\PASS.shproj", "{8810375E-4812-4F37-A1A6-08B0939F08E0}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.UGMSTests", "PASS.UGMS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.AMSTests", "PASS.AMSTests\PASS.AMSTests.csproj", "{8956A928-3773-4133-B9BF-2EDED0D18032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.Web", "PASS.Web\PASS.Web.csproj", "{A0837926-AC1D-45B9-8516-1DDC9E149848}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASS.Web", "PASS.Web\PASS.Web.csproj", "{9D9886CB-2D72-4357-BC18-9F0C5606F733}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -58,10 +58,10 @@ Global
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8956A928-3773-4133-B9BF-2EDED0D18032}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0837926-AC1D-45B9-8516-1DDC9E149848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D9886CB-2D72-4357-BC18-9F0C5606F733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D9886CB-2D72-4357-BC18-9F0C5606F733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D9886CB-2D72-4357-BC18-9F0C5606F733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D9886CB-2D72-4357-BC18-9F0C5606F733}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

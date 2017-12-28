@@ -18,7 +18,7 @@ namespace PASS.Models.AssignmentManagement
 
         public int AssignOrder { get; set; }
 
-        public string IsUploaded { get; set; }
+        public bool IsUploaded { get; set; }
 
         public DateTime EndDate { get; set; }
 

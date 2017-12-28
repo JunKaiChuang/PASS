@@ -56,7 +56,11 @@
     <Compile Include="Course\SemesterInfo.cs" />
     <Compile Include="Dao\PropertyContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserGroupManagement\UserInfo.cs" />
     <Compile Include="UserGroupManagement\UserProfile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enum\PASS.Enum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
