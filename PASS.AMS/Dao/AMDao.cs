@@ -38,8 +38,50 @@ namespace PASS.AMS.Dao
                 return DtToObj(dt).FirstOrDefault();
             }
         }
-        
 
+        public List<Assignment> GetAssignmentListByCourseNo(Int64 courseNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"
+                            select * from Assignment
+                            where (CourseNo=@CourseNo)";
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@CourseNo", courseNo);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                return DtToObj(dt);
+            }
+        }
+
+        public Int64 GetUserNoByFileNo (Int64 fileNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"
+                            select UP.UserNo
+                            from File as F
+                            	join SubmissionDetail as SD on F.FileNo = SD.FileNo
+                            	join UserProfile as UP on SD.UserNo = UP.UserNo
+                            where F.FileNo = @FileNo";
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@FileNo", fileNo);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                var result = dt.Rows[0].Field<Int64>("UserNo");
+
+                return result;
+            }
+
+        }
 
         private List<Assignment> DtToObj(DataTable dt)
         {
@@ -57,5 +99,7 @@ namespace PASS.AMS.Dao
                                 }).ToList();
             return userProfiles;
         }
+
+
     }
 }

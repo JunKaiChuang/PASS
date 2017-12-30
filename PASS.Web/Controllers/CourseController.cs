@@ -48,6 +48,7 @@ namespace PASS.Web.Controllers
             HttpCookie cookie = Request.Cookies["PASS.LoginInfo"];
 
             var courseInfo = _AMService.GetCourseInfoByCourseNo(courseNo);
+            var userType = (UserType)Convert.ToInt64(cookie["UserType"]);
 
             if (cookie["CourseNo"] == null)
             {
@@ -62,7 +63,20 @@ namespace PASS.Web.Controllers
 
 
             Response.Cookies.Add(cookie);
-            return Json(true);
+
+            var dest = "";
+
+            switch (userType)
+            {
+                case UserType.學生:
+                    dest = "../Student/Submission";
+                    break;
+                default:
+                    dest = "../Manager/AssignmentList";
+                    break;
+            }
+
+            return Json(dest);
         }
     }
 }

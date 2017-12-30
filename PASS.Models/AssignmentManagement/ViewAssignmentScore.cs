@@ -13,6 +13,8 @@ namespace PASS.Models.AssignmentManagement
     {
         public string UserName { get; set; }
 
-        public Int64 FileNo { get; set; }
+        public string UserID { get; set; }
+
+        public Int64? FileNo { get; set; }
     }
 }

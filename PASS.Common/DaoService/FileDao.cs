@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using PASS.Models.Dao;
 using PASS.Models.Attribute;
 using System.Configuration;
+using System.Data;
 
 namespace PASS.Common.DaoService
 {
@@ -22,6 +23,29 @@ namespace PASS.Common.DaoService
             if (!File.Exists(dbPath))
             {
                 throw new ArgumentNullException("DB路徑錯誤，請修改PASS.Common.DaoService中App.config的[DbPath]");
+            }
+        }
+
+        public string GetFileName(Int64 fileNo)
+        {
+            using (var cn = GetOpenConnection())
+            {
+                var sql = @"
+                            select SD.FileName
+                            from File as F
+                                join SubmissionDetail as SD on F.FileNo = SD.FileNo
+                            where F.FileNo = @FileNo";
+
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, cn);
+                da.SelectCommand.Parameters.AddWithValue("@FileNo", fileNo);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                var result = dt.Rows[0].Field<string>("FileName");
+
+                return result;
             }
         }
 
@@ -78,7 +102,7 @@ namespace PASS.Common.DaoService
             }
         }
 
-        public MemoryStream GetFile(Int64 fileNo)
+        public byte[] GetFile(Int64 fileNo)
         {
             using (var cn = GetOpenConnection())
             {
@@ -90,7 +114,7 @@ namespace PASS.Common.DaoService
                 using (var reader = sqlCmd.ExecuteReader())
                 {
                     reader.Read();
-                    return GetStream(reader);
+                    return GetStream(reader).ToArray();
                 }
             }
         }

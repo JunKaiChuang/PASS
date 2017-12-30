@@ -15,6 +15,13 @@ namespace PASS.AMS.Service
     public interface IAMService
     {
         /// <summary>
+        /// 取得學生作業成績資料(網頁檢閱)
+        /// </summary>
+        /// <param name="assignmentNo"></param>
+        /// <returns></returns>
+        List<ViewAssignmentScore> GetViewAssignmentScore(Int64 assignmentNo);
+
+        /// <summary>
         /// 作業題目管理
         /// </summary>
         /// <param name="assignment"></param>
@@ -34,6 +41,13 @@ namespace PASS.AMS.Service
         /// <param name="assignmentNo"></param>
         /// <returns></returns>
         Assignment GetAssignment(Int64 assignmentNo);
+
+        /// <summary>
+        /// 刪除作業題目
+        /// </summary>
+        /// <param name="assignment"></param>
+        /// <returns></returns>
+        bool DeleteAssignment(Assignment assignment);
 
         /// <summary>
         /// 學生作業上傳
@@ -79,5 +93,19 @@ namespace PASS.AMS.Service
         /// <param name="courseNo"></param>
         /// <returns></returns>
         CourseInfo GetCourseInfoByCourseNo(Int64 courseNo);
+
+        /// <summary>
+        /// 取得檔案
+        /// </summary>
+        /// <param name="fileNo"></param>
+        /// <returns></returns>
+        byte[] GetFile(Int64 fileNo, string assignmentNo);
+
+        /// <summary>
+        /// 取得檔案名稱
+        /// </summary>
+        /// <param name="fileNo"></param>
+        /// <returns></returns>
+        string GetFileName(Int64 fileNo);
     }
 }

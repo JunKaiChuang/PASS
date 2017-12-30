@@ -24,10 +24,12 @@ namespace PASS.AMS.Service
         private CourseDao _CourseDao = new CourseDao();
         private ViewSubmissionDao _ViewSubDao = new ViewSubmissionDao();
         private GenericDao<SubmissionDetail> _SubDao = new GenericDao<SubmissionDetail>();
+        private GenericDao<AssignmentScore> _ScoreDao = new GenericDao<AssignmentScore>();
+        private ViewAssignmentScoreDao _ViewAssignmentScoreDao = new ViewAssignmentScoreDao();
 
         private SecurityService _security = new SecurityService();
         private CommonService _commonService = new CommonService();
-
+              
         public bool CreateOrModifyAssignment(Assignment assignment)
         {
             return _AMDao.CreateOrModify(assignment);
@@ -35,7 +37,7 @@ namespace PASS.AMS.Service
 
         public List<Assignment> GetAssignmentList(long courseNo)
         {
-            throw new NotImplementedException();
+            return _AMDao.GetAssignmentListByCourseNo(courseNo);
         }
 
         public SubmissionDetail GetSubmissionDetail(long submissionNo)
@@ -93,6 +95,46 @@ namespace PASS.AMS.Service
         public ViewSubmission GetViewSubmissionByUserNoAndAssignmentNo(long userNo, long assignmentNo)
         {
             return _ViewSubDao.GetViewSubmissionByUserNoAndAssignmentNo(userNo, assignmentNo);
+        }
+
+        public bool DeleteAssignment(Assignment assignment)
+        {
+            return _AMDao.Delete(assignment);
+        }
+
+        public List<ViewAssignmentScore> GetViewAssignmentScore(long assignmentNo)
+        {
+            return _ViewAssignmentScoreDao.GetViewAssignmentScore(assignmentNo);
+        }
+
+        public bool UpdateScore(List<AssignmentScore> scoreList)
+        {
+            foreach (var score in scoreList)
+            {
+                _ScoreDao.Delete(score);
+                _ScoreDao.Insert(score);
+            }
+
+            return true;
+        }
+
+        public byte[] GetFile(long fileNo, string assignmentNo)
+        {
+            var userNo = GetUserNoByFileNo(fileNo).ToString();
+            var security = new SecurityService(userNo, assignmentNo);
+            var dbFile = _FileDao.GetFile(fileNo);
+
+            return security.DecryptFile(dbFile);
+        }
+
+        private Int64 GetUserNoByFileNo(Int64 fileNo)
+        {
+            return _AMDao.GetUserNoByFileNo(fileNo);
+        }
+
+        public string GetFileName(long fileNo)
+        {
+            return _FileDao.GetFileName(fileNo);
         }
     }
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Dao\AMDao.cs" />
     <Compile Include="Dao\CourseDao.cs" />
+    <Compile Include="Dao\ViewAssignmentScoreDao.cs" />
     <Compile Include="Dao\ViewSubmissionDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AMService.cs" />

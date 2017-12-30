@@ -15,6 +15,9 @@ namespace PASS.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            HttpCookie cookie = Request.Cookies["PASS.LoginInfo"];
+            cookie.Values.Clear();
+            Response.Cookies.Add(cookie);
             return View();
         }
 

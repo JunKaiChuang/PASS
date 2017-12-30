@@ -40,7 +40,7 @@ namespace PASS.AMS.Dao
                             	join CourseInfo as CI on CS.CourseNo = CI.CourseNo
                             	join Assignment as A on CI.CourseNo = A.CourseNo
                             	left join SubmissionDetail as SUB on A.AssignmentNo = SUB.AssignmentNo and UP.UserNo = SUB.UserNo
-                            	left join Score as S on UP.UserNo = S.UserNo and A.AssignmentNo = S.AssignmentNo
+                            	left join AssignmentScore as S on UP.UserNo = S.UserNo and A.AssignmentNo = S.AssignmentNo
                             where UP.UserNo = @UserNo
                             	and CS.SchoolYear = @SchoolYear
                             	and CS.Semester = @Semester
@@ -77,7 +77,7 @@ namespace PASS.AMS.Dao
                             	join CourseInfo as CI on CS.CourseNo = CI.CourseNo
                             	join Assignment as A on CI.CourseNo = A.CourseNo
                             	left join SubmissionDetail as SUB on A.AssignmentNo = SUB.AssignmentNo and UP.UserNo = SUB.UserNo
-                            	left join Score as S on UP.UserNo = S.UserNo and A.AssignmentNo = S.AssignmentNo
+                            	left join AssignmentScore as S on UP.UserNo = S.UserNo and A.AssignmentNo = S.AssignmentNo
                             where UP.UserNo = @UserNo
                             	and CS.SchoolYear = @SchoolYear
                             	and CS.Semester = @Semester
@@ -109,7 +109,7 @@ namespace PASS.AMS.Dao
                                     AssignOrder = (int)row.Field<Int64>("AssignOrder"),
                                     IsUploaded = row.Field<Int64>("IsUploaded") == 0 ? false : true,
                                     EndDate = row.Field<DateTime>("EndDate"),
-                                    Score = row.Field<string>("Score")
+                                    Score = row.Field<Int64?>("Score").ToString()
                                 }).ToList();
             return userProfiles;
         }

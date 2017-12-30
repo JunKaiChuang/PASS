@@ -20,9 +20,8 @@ namespace PASS.Common.DaoService.Tests
         {
             SecurityService security = new SecurityService();
             _userProfile = new UserProfile();
-            _userProfile.UserID = "0001";
-            _userProfile.UserName = "王小明";
-            _userProfile.UserNo = 106000001;
+            _userProfile.UserID = "0003";
+            _userProfile.UserName = "陳曉東";
             _userProfile.UserPW = security.GetDigestText("p@ssw0rd");
             _userProfile.Authorization = string.Empty;
         }

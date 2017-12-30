@@ -27,7 +27,7 @@
         function (data, status) {
 
             if (data) {
-                $.redirect('../Student/Submission', {});
+                $.redirect(data, {});
             }
 
         });

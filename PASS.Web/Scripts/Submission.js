@@ -131,17 +131,21 @@
             var amounts = data.length;
 
             var table = $('<table border="1" style="width:600px;height:auto;"></table>');
-            var firstRow = $('<tr><th>作業名稱</th><th>上傳情形</th><th>繳交期限</th><th>作業成績</th><th>上傳/補交</th></tr>');
+            var firstRow = $('<tr><th>作業名稱</th><th>上傳情形</th><th>繳交期限</th><th>作業成績</th><th>上傳</th></tr>');
             table.append(firstRow);
             for (var i = 0; i < amounts; i++) {
                 var milli = data[i].EndDate.replace(/\/Date\((-?\d+)\)\//, '$1');
                 var endTime = $.format.date(new Date(parseInt(milli)), "yyyy/MM/dd");
                 var isUpload = "未上傳";
-
+                var uploadBtn = "<td>截止</td>";
+                var now = new Date($.now());
+                
+                if (now <= new Date(parseInt(milli))) uploadBtn = '<td align="center"><button id="enterCourse" value = "' + data[i].AssignmentNo + '">選擇檔案</button></td>';
                 if (data[i].Score == null) data[i].Score = '';
                 if (data[i].IsUploaded) isUpload = "已上傳";
 
-                var row = $('<tr>' + '<td>' + data[i].AssignmentTitle + '</td>' + '<td>' + isUpload + '</td>' + '<td>' + endTime + '</td>' + '<td>' + data[i].Score + '</td>' + '<td align="center"><button id="enterCourse" value = "' + data[i].AssignmentNo + '">選擇檔案</button></td>' + '</tr>');
+
+                var row = $('<tr>' + '<td>' + data[i].AssignmentTitle + '</td>' + '<td>' + isUpload + '</td>' + '<td>' + endTime + '</td>' + '<td>' + data[i].Score + '</td>' + uploadBtn + '</tr>');
                 table.append(row);
             }
             $('#here_table').append(table);

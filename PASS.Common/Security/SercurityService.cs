@@ -17,13 +17,15 @@ namespace PASS.Common.Security
         /// 初始化安全服務
         /// </summary>
         /// <param name="userNo">使用者編號</param>
-        /// <param name="userID">使用者ID</param>
+        /// <param name="assignmentNo">作業編號</param>
         public SecurityService(string userNo="emptyIV-", string assignmentNo= "emptyKEY-")
         {
-            if(userNo.Length > 8 || assignmentNo.Length > 8) new ArgumentNullException("加密的iv 或key大於8 bytes");
             //使用userNo,userID作為IV以及KEY
-            _iv = assignmentNo.ToString().PadLeft(8, '0'); ;
-            _key = userNo.ToString().PadLeft(8, '0'); ;
+            _iv = assignmentNo.ToString().PadLeft(8, '0');
+            _key = userNo.ToString().PadLeft(8, '0');
+
+            _iv = GetRightString(_iv, 8);
+            _key = GetRightString(_key, 8);
         }
 
         /// <summary>
@@ -99,6 +101,20 @@ namespace PASS.Common.Security
                 cs.FlushFinalBlock();
 
                 return ms.ToArray();
+            }
+        }
+
+        private string GetRightString(string s, int length)
+        {
+            length = Math.Max(length, 0);
+
+            if (s.Length > length)
+            {
+                return s.Substring(s.Length - length, length);
+            }
+            else
+            {
+                return s;
             }
         }
     }
