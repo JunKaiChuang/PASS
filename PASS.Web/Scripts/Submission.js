@@ -29,8 +29,8 @@
     {
         var input = $('input[name=file]');
         file = input[0].files[0];        
-        if (file.size > 1024) {
-            alert('max upload size is 1k')
+        if (file.size > 1024*1024) {
+            alert('max upload size is 1M')
             return false;
         }
         if (file.type != 'c' && false) //暫時沒做判斷
