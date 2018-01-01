@@ -16,7 +16,14 @@ namespace PASS.Web.Controllers
         public ActionResult Index()
         {
             HttpCookie cookie = Request.Cookies["PASS.LoginInfo"];
-            cookie.Values.Clear();
+            if (cookie == null)
+            {
+                cookie = new HttpCookie("PASS.LoginInfo");
+            }
+            else
+            {
+                cookie.Values.Clear();
+            }
             Response.Cookies.Add(cookie);
             return View();
         }
